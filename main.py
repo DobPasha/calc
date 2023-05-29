@@ -37,6 +37,7 @@ root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 def click():
     window1 = tk.Tk()
     window1.title("Рассчет реакции")
+
     window1.geometry("1000x500")
 
     # Настроим всплывающее окно 1
@@ -78,7 +79,7 @@ def click():
         screen_width = window3.winfo_screenwidth()
         screen_height = window3.winfo_screenheight()
         window_width = 500
-        window_height = 500
+        window_height = 100
         x = (screen_width // 2) - (window_width // 2)
         y = (screen_height // 2) - (window_height // 2)
         window3.geometry(f"{window_width}x{window_height}+{x}+{y}")
@@ -95,25 +96,41 @@ def click():
 
         # Добавляем калькулятор рассчета по введенному значению
         def calculate_a():
-            kg = int(entry31.get())
-            a = 0.342857 * kg
-            a = round(a, 0)
-            if a > 0:
-                messagebox.showinfo('Загрузка серы', f'S(кг)= {a} ')
+            try:
+                kg = int(entry31.get())
+                a = 0.342857 * kg
+                a = round(a, 3)
+                if a > 0:
+                    messagebox.showinfo('Загрузка серы', f'S(кг) = {a}')
+                else:
+                    messagebox.showwarning('Ошибка', 'Значение должно быть положительным.')
+            except ValueError:
+                messagebox.showerror('Ошибка', 'Введите числовое значение.')
+                print(a)
 
         def calculate_b():
-            kg = int(entry31.get())
-            b = 0.196793 * kg
-            b = round(b, 0)
-            if b > 0:
-                messagebox.showinfo('Загрузка воды', f'H2O(кг) = {b} ')
+            try:
+                kg = int(entry31.get())
+                b = 0.196793 * kg
+                b = round(b, 3)
+                if b > 0:
+                    messagebox.showinfo('Загрузка воды', f'H2O(кг) = {b}')
+                else:
+                    messagebox.showwarning('Ошибка', 'Значение должно быть положительным.')
+            except ValueError:
+                messagebox.showerror('Ошибка', 'Введите числовое значение.')
 
         def calculate_c():
-            kg = int(entry31.get())
-            c = 2.219388 * kg
-            c = round(c, 0)
-            if c > 0:
-                messagebox.showinfo('Загрузка воздуха', f'Воздух(кг) = {c} ')
+            try:
+                kg = int(entry31.get())
+                c = 2.219388 * kg
+                c = round(c, 3)
+                if c > 0:
+                    messagebox.showinfo('Загрузка воздуха', f'Воздух(кг) = {c}')
+                else:
+                    messagebox.showwarning('Ошибка', 'Значение должно быть положительным.')
+            except ValueError:
+                messagebox.showerror('Ошибка', 'Введите числовое значение.')
 
         # Кнопка запуска рассчета
         button31 = tk.Button(frame, text="Рассчитать СЕРУ", command=calculate_a)
@@ -159,5 +176,3 @@ root.attributes("-topmost", True)
 
 # Запускаем основной цикл
 root.mainloop()
-
-
